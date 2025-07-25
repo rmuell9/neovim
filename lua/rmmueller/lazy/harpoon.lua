@@ -11,5 +11,6 @@ return
             vim.keymap.set('n', '<leader>h3', ':lua require("harpoon.ui").nav_file(3)<CR>')
             vim.keymap.set('n', '<leader>h4', ':lua require("harpoon.ui").nav_file(4)<CR>')
             vim.keymap.set('n', '<leader>h5', ':lua require("harpoon.ui").nav_file(5)<CR>')
+            vim.keymap.set('n', '<leader>hc', ':lua require("harpoon.mark").clear_all()<CR>')
         end
     }
