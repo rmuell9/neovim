@@ -36,3 +36,4 @@ vim.opt.guifont = "Hacker Nerd Font:h12"
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.fillchars = { eob = " " }
