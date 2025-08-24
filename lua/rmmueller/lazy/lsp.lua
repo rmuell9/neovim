@@ -46,6 +46,7 @@ return {
                 "gopls",
                 "pylsp",
                 "ruby_lsp",
+                "clangd",
             },
             handlers = {
                 function(server_name) -- default handler (optional)

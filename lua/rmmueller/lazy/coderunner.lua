@@ -7,6 +7,7 @@ return {
             filetype = {
                 python = 'python3 -u',
                 ruby = 'ruby',
+                go = 'go run',
                 lisp = function()
                     local file = vim.fn.expand '%:p'
                     return string.format('sbcl --script %s', file)
