@@ -1,3 +1,6 @@
+#Default color scheme if theme.lua is not found
+vim.cmd.colorscheme("habamax")
+
 require("rmmueller.remap")
 require("rmmueller.set")
 require("rmmueller.lazy_init")
