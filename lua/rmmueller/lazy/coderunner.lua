@@ -8,6 +8,7 @@ return {
                 python = 'python3 -u',
                 ruby = 'ruby',
                 go = 'go run',
+
                 lisp = function()
                     local file = vim.fn.expand '%:p'
                     return string.format('sbcl --script %s', file)
@@ -15,6 +16,10 @@ return {
                 scheme = function()
                     local file = vim.fn.expand '%:p'
                     return string.format('guile %s', file)
+                end,
+                ocaml = function()
+                    local file = vim.fn.expand '%:p'
+                    return string.format('ocaml %s', file)
                 end,
             },
         }

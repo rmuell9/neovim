@@ -48,6 +48,7 @@ return {
                 "pylsp",
                 "ruby_lsp",
                 "clangd",
+                "ocamllsp",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
