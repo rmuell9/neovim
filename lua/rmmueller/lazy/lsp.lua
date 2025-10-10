@@ -49,6 +49,7 @@ return {
                 "ruby_lsp",
                 "clangd",
                 "ocamllsp",
+                "rust_analyzer",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
