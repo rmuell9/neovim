@@ -1,4 +1,4 @@
-return{
+return {
     'brianhuster/live-preview.nvim',
     dependencies = {
         'nvim-telescope/telescope.nvim',
@@ -10,7 +10,5 @@ return{
             open_browser = true,
             browser = 'chromium',
         })
-
     end
-
 }
