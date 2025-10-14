@@ -32,8 +32,11 @@ vim.opt.splitbelow = true
 vim.opt.wrap = true
 vim.opt.linebreak = true
 
-vim.opt.guifont = "Hacker Nerd Font:h12"
+vim.opt.guifont = "Jetbrains Mono Nerd Font:h12"
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.fillchars = { eob = " " }
+
+vim.opt.colorcolumn = "80"
+vim.opt.signcolumn = "yes" -- Always show sign column (for git/diagnostics)

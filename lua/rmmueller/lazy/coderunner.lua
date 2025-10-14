@@ -21,6 +21,12 @@ return {
                     local file = vim.fn.expand '%:p'
                     return string.format('ocaml %s', file)
                 end,
+                markdown = function()
+                    vim.cmd('PeekOpen')
+                end,
+                html = function()
+                    vim.cmd('LivePreview start')
+                end,
             },
         }
     end,
