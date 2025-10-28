@@ -15,3 +15,9 @@ vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d") -- Delete without yanking
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+-- replace in line
+vim.keymap.set('n', "<leader>s", ':s/\\<<C-r><C-w>\\>/<C-r><C-w>/g<Left><Left>')
+
+-- replace in file
+vim.keymap.set('n', "<leader>S", ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/g<Left><Left>')

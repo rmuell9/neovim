@@ -29,7 +29,7 @@ vim.opt.clipboard = 'unnamedplus'
 
 vim.opt.splitbelow = true
 
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.linebreak = true
 
 vim.opt.guifont = "Jetbrains Mono Nerd Font:h12"

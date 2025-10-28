@@ -3,8 +3,8 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim'},
     config = function()
         local system_prompt =
-        'You should replace the code that you are sent, only following the comments. Do not talk at all. Only output valid code. Do not provide any backticks that surround the code. Never ever output backticks like this ```. Any comment that is asking you for something should be removed after you satisfy them. Other comments should left alone. Do not output backticks. Make no mistakes.'
-        local helpful_prompt = 'You are a helpful assistant who is always concise and makes no mistakes. What I have sent are my notes so far.'
+        'You should replace the code that you are sent, only following the comments. Do not talk at all. Only output valid code. Do not provide any backticks that surround the code. Never ever output backticks like this ```. Any comment that is asking you for something should be removed after you satisfy them. Other comments should left alone. Do not output backticks. Make no mistakes and indent after 80 characters.'
+        local helpful_prompt = 'You are a helpful assistant who is always concise and makes no mistakes. What I have sent are my notes so far. If a line you wrote it over 80 characters, indent to a new line.'
         local dingllm = require 'dingllm'
 
 
