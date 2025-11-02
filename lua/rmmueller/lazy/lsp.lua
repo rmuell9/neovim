@@ -50,6 +50,7 @@ return {
                 "clangd",
                 "ocamllsp",
                 "rust_analyzer",
+                "jdtls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
