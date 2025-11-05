@@ -1,11 +1,11 @@
 return {
-    'yacineMTB/dingllm.nvim',
+    'rmuell9/jarvis.nvim',
     dependencies = { 'nvim-lua/plenary.nvim'},
     config = function()
         local system_prompt =
-        'You should replace the code that you are sent, only following the comments. Do not talk at all. Only output valid code. Do not provide any backticks that surround the code. Never ever output backticks like this ```. Any comment that is asking you for something should be removed after you satisfy them. Other comments should left alone. Do not output backticks. Make no mistakes and indent after 80 characters.'
+        'You should replace the code that you are sent, only following the comments. Do not talk at all. Only output valid code. Do not provide any backticks that surround the code. Never ever output backticks like this ```. Any comment that is asking you for something should be removed after you satisfy them. Other comments should left alone. Do not output backticks. Indent after 80 characters.'
         local helpful_prompt = 'You are a helpful assistant who is always concise and makes no mistakes. What I have sent are my notes so far. If a line you wrote it over 80 characters, indent to a new line.'
-        local dingllm = require 'dingllm'
+        local jarvis = require 'jarvis'
 
 
         local function handle_open_router_spec_data(data_stream)
@@ -14,7 +14,7 @@ return {
                 if json.choices and json.choices[1] and json.choices[1].text then
                     local content = json.choices[1].text
                     if content then
-                        dingllm.write_string_at_cursor(content)
+                        jarvis.write_string_at_cursor(content)
                     end
                 end
             else
@@ -41,23 +41,23 @@ return {
         end
 
         local function anthropic_help()
-            dingllm.invoke_llm_and_stream_into_editor({
+            jarvis.invoke_llm_and_stream_into_editor({
                 url = 'https://api.anthropic.com/v1/messages',
                 model = 'claude-sonnet-4-20250514',
                 api_key_name = 'ANTHROPIC_API_KEY',
                 system_prompt = helpful_prompt,
                 replace = false,
-            }, dingllm.make_anthropic_spec_curl_args, dingllm.handle_anthropic_spec_data)
+            }, jarvis.make_anthropic_spec_curl_args, jarvis.handle_anthropic_spec_data)
         end
 
         local function anthropic_replace()
-            dingllm.invoke_llm_and_stream_into_editor({
+            jarvis.invoke_llm_and_stream_into_editor({
                 url = 'https://api.anthropic.com/v1/messages',
                 model = 'claude-opus-4-20250514',
                 api_key_name = 'ANTHROPIC_API_KEY',
                 system_prompt = system_prompt,
                 replace = true,
-            }, dingllm.make_anthropic_spec_curl_args, dingllm.handle_anthropic_spec_data)
+            }, jarvis.make_anthropic_spec_curl_args, jarvis.handle_anthropic_spec_data)
         end
 
         vim.keymap.set({ 'n', 'v' }, '<leader>i', anthropic_help, { desc = 'llm anthropic_help' })
