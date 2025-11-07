@@ -12,6 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    spec = "rmmueller.lazy",
+    spec = "rmuell9.lazy",
     change_detection = { notify = false}
 })
