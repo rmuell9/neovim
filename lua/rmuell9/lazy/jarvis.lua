@@ -31,8 +31,30 @@ return {
             }, jarvis.make_anthropic_spec_curl_args, jarvis.handle_anthropic_spec_data)
         end
 
+        local function openai_help()
+            jarvis.invoke_llm_and_stream_into_editor({
+                url = 'https://api.openai.com/v1/chat/completions',
+                model = 'gpt-5',
+                api_key_name = 'OPENAI_API_KEY',
+                system_prompt = helpful_prompt,
+                replace = false,
+            }, jarvis.make_openai_spec_curl_args, jarvis.handle_openai_spec_data)
+        end
+
+        local function openai_replace()
+            jarvis.invoke_llm_and_stream_into_editor({
+                url = 'https://api.openai.com/v1/chat/completions',
+                model = 'gpt-5',
+                api_key_name = 'OPENAI_API_KEY',
+                system_prompt = system_prompt,
+                replace = true,
+            }, jarvis.make_openai_spec_curl_args, jarvis.handle_openai_spec_data)
+        end
+
         vim.keymap.set({ 'n', 'v' }, '<leader>i', anthropic_help, { desc = 'llm anthropic_help' })
         vim.keymap.set({ 'n', 'v' }, '<leader>I', anthropic_replace, { desc = 'llm anthropic' })
+        vim.keymap.set({ 'n', 'v' }, '<leader>g', openai_help, { desc = 'llm openai_help' })
+        vim.keymap.set({ 'n', 'v' }, '<leader>G', openai_replace, { desc = 'llm openai_replace' })
 
     end
 }
