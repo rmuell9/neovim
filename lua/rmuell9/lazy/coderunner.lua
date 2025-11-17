@@ -8,6 +8,7 @@ return {
                 python = 'python3 -u',
                 ruby = 'ruby',
                 go = 'go run',
+                zig = 'zig run',
 
                 lisp = function()
                     local file = vim.fn.expand '%:p'
