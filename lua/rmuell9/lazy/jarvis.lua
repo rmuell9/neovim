@@ -15,7 +15,7 @@ return {
         local function anthropic_help()
             jarvis.invoke_llm_and_stream_into_editor({
                 url = 'https://api.anthropic.com/v1/messages',
-                model = 'claude-sonnet-4-20250514',
+                model = 'claude-sonnet-4-5-20250929',
                 api_key_name = 'ANTHROPIC_API_KEY',
                 system_prompt = helpful_prompt,
                 replace = false,
@@ -25,7 +25,7 @@ return {
         local function anthropic_replace()
             jarvis.invoke_llm_and_stream_into_editor({
                 url = 'https://api.anthropic.com/v1/messages',
-                model = 'claude-opus-4-20250514',
+                model = 'claude-opus-4-5-20251101',
                 api_key_name = 'ANTHROPIC_API_KEY',
                 system_prompt = system_prompt,
                 replace = true,
