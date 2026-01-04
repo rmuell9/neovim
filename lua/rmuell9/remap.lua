@@ -21,3 +21,22 @@ vim.keymap.set('n', "<leader>s", ':s/\\<<C-r><C-w>\\>/<C-r><C-w>/g<Left><Left>')
 
 -- replace in file
 vim.keymap.set('n', "<leader>S", ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/g<Left><Left>')
+
+vim.keymap.set("n", "<leader>lp", function()
+  local venv = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX")
+  if venv ~= nil then
+    -- in the form of /home/benlubas/.virtualenvs/VENV_NAME
+    venv = string.match(venv, "/.+/(.+)")
+    vim.cmd(("MoltenInit %s"):format(venv))
+  else
+    -- For uv projects, use current directory name as kernel name
+    local kernel_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+    -- Check if uv project (has pyproject.toml or .venv directory)
+    if vim.fn.filereadable("pyproject.toml") == 1 or 
+       vim.fn.isdirectory(".venv") == 1 then
+      vim.cmd(("MoltenInit %s"):format(kernel_name))
+    else
+      vim.cmd("MoltenInit python3")
+    end
+  end
+end, { desc = "Initialize Molten for python3", silent = true })
