@@ -46,6 +46,7 @@ return {
                 "hls",
                 "gopls",
                 "pylsp",
+                "nextls",
                 "ruby_lsp",
                 "clangd",
                 "ocamllsp",

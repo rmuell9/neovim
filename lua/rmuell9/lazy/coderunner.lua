@@ -9,6 +9,7 @@ return {
                 ruby = 'ruby',
                 go = 'go run',
                 zig = 'zig run',
+                elixir = 'elixir',
 
                 lisp = function()
                     local file = vim.fn.expand '%:p'
