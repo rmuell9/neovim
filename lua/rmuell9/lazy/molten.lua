@@ -8,19 +8,14 @@ return {
             vim.g.molten_image_provider = "image.nvim"
             vim.g.molten_output_win_max_height = 20
 
-            vim.keymap.set("n", "<leader>el", ":MoltenEvaluateLine<CR>",
+            vim.keymap.set("n", "<leader>jv", ":MoltenEvaluateLine<CR>",
                 { silent = true, desc = "Molten evaluate line" })
-            vim.keymap.set("v", "<leader>ev", ":<C-u>MoltenEvaluateVisual<CR>gv",
+            vim.keymap.set("v", "<leader>jv", ":<C-u>MoltenEvaluateVisual<CR>gv",
                 { silent = true, desc = "Molten evaluate visual" })
-            vim.keymap.set("n", "<leader>eo", ":MoltenEnterOutput<CR>",
+            vim.keymap.set("n", "<leader>jo", ":MoltenEnterOutput<CR>",
                 { silent = true, desc = "Molten enter output" })
-            vim.keymap.set("n", "<leader>ed", ":MoltenDelete<CR>",
+            vim.keymap.set("n", "<leader>jd", ":MoltenDelete<CR>",
                 { silent = true, desc = "Molten delete output" })
-            vim.keymap.set('n', '<leader>ei', function()
-              -- Get the current directory name as kernel name
-              local kernel_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
-              vim.cmd('MoltenInit ' .. kernel_name)
-            end, { desc = 'Molten: Init kernel for current project' })
         end,
 }
 
