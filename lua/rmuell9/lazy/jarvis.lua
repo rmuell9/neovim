@@ -10,7 +10,7 @@ return {
             .. 'not provide any backticks that surround the code. Never ever '
             .. 'output backticks like this ```. Any comment that is asking '
             .. 'you for something should be removed after you satisfy them. '
-            .. 'Other comments should left alone.'
+            .. 'Other comments should be left alone.'
 
         local helpful_prompt =
             'You are a helpful assistant who is always concise and makes no '

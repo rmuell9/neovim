@@ -40,9 +40,9 @@ return {
             vim.g.molten_image_provider = "image.nvim"
             vim.g.molten_output_win_max_height = 20
             vim.g.python3_host_prog=vim.fn.expand("~/.virtualenvs/neovim/bin/python3")
-            vim.keymap.set("n", "<leader>jv", ":MoltenEvaluateLine<CR>",
+            vim.keymap.set("n", "<leader>jf", ":MoltenEvaluateLine<CR>",
                 { silent = true, desc = "Molten evaluate line" })
-            vim.keymap.set("v", "<leader>jv", ":<C-u>MoltenEvaluateVisual<CR>gv",
+            vim.keymap.set("v", "<leader>jf", ":<C-u>MoltenEvaluateVisual<CR>gv",
                 { silent = true, desc = "Molten evaluate visual" })
             vim.keymap.set("n", "<leader>jo", ":MoltenEnterOutput<CR>",
                 { silent = true, desc = "Molten enter output" })
