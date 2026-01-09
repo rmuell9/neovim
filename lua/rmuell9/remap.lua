@@ -15,3 +15,5 @@ vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d") -- Delete without yanking
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+vim.keymap.set("n", "<leader>t", "<cmd>ReloadTheme<CR>")

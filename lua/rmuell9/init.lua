@@ -12,23 +12,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
 vim.api.nvim_create_user_command('ReloadTheme', function()
     local theme_spec = require('rmuell9.lazy.theme')
-    
     if theme_spec.name then
         require('lazy').load({ plugins = { theme_spec.name } })
     end
-    
     local max_attempts = 10
     local attempt = 0
-    
     local function try_apply_theme()
         attempt = attempt + 1
         if not theme_spec.config then return end
-        
         local ok, err = pcall(theme_spec.config)
         if ok then return end
-        
         if attempt < max_attempts then
             vim.defer_fn(try_apply_theme, 50 * attempt)
         else
@@ -36,7 +32,6 @@ vim.api.nvim_create_user_command('ReloadTheme', function()
                 vim.log.levels.ERROR)
         end
     end
-    
     vim.defer_fn(try_apply_theme, 50)
 end, {})
 
