@@ -34,4 +34,3 @@ vim.api.nvim_create_user_command('ReloadTheme', function()
     end
     vim.defer_fn(try_apply_theme, 50)
 end, {})
-
