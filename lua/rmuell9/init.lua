@@ -34,3 +34,13 @@ vim.api.nvim_create_user_command('ReloadTheme', function()
     end
     vim.defer_fn(try_apply_theme, 50)
 end, {})
+
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*",
+  callback = function()
+    if vim.fn.bufname() == "" and vim.bo.filetype == "" then
+      vim.bo.filetype = "markdown"
+    end
+  end,
+})

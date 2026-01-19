@@ -23,28 +23,41 @@ return {
                 },
             }
             require("zen-mode").toggle()
-            vim.wo.wrap = false
-            vim.wo.number = false
-            vim.wo.rnu = false
-            vim.opt.colorcolumn = "0"
+                vim.wo.wrap = false
+                vim.wo.number = false
+                vim.wo.rnu = false
+                vim.opt.colorcolumn = "0"
+                vim.opt.cmdheight = 0
+                vim.opt.laststatus = 0
+                vim.opt.ruler = false
+                vim.opt.showmode = false
+                vim.opt.showcmd = false
+        end)
+
+        vim.keymap.set("n", "<leader>zq", function()
+            require("zen-mode").close()
+            vim.wo.wrap = true
+            vim.wo.number = true
+            vim.wo.rnu = true
+            vim.opt.colorcolumn = "80"
+            vim.opt.cmdheight = 1
+            vim.opt.laststatus = 2
+            vim.opt.ruler = true
+            vim.opt.showmode = true
+            vim.opt.showcmd = true
         end)
 
         vim.api.nvim_create_autocmd("FileType", {
             pattern = "markdown",
             callback = function()
                 vim.schedule(function()
-                    require("zen-mode").setup {
-                        window = {
-                            width = 80,
-                            options = { }
-                        },
-                    }
-                    require("zen-mode").toggle()
-                    vim.wo.wrap = false
-                    vim.wo.number = false
-                    vim.wo.rnu = false
-                    vim.opt.colorcolumn = "0"
-                    vim.cmd("normal! gg")
+                    vim.api.nvim_feedkeys(
+                        vim.api.nvim_replace_termcodes(
+                            "<leader>zZ", true, false, true
+                        ),
+                        "m",
+                        false
+                    )
                 end)
             end,
         })
