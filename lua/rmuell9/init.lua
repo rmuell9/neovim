@@ -44,3 +44,19 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd('CmdlineLeave', {
+  desc = 'Clear command line after 5 seconds',
+  group = vim.api.nvim_create_augroup('clear-cmdline', { clear = true }),
+  callback = function()
+    local timer_id = vim.loop.new_timer()
+    timer_id:start(5000, 0, vim.schedule_wrap(function()
+      if vim.fn.getcmdwintype() == '' and vim.fn.mode() ~= 'c' then
+        vim.cmd('echo ""')
+      end
+      timer_id:stop()
+      timer_id:close()
+    end))
+  end,
+})
+

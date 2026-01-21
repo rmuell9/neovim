@@ -5,18 +5,22 @@ return {
             local buftype = vim.bo.buftype
             local filetype = vim.bo.filetype
             local excluded_filetypes = { "oil", "neo-tree", "NvimTree", "TelescopePrompt" }
-            
             if buftype ~= "" then
                 return false
             end
-            
             for _, ft in ipairs(excluded_filetypes) do
                 if filetype == ft then
                     return false
                 end
             end
-            
             return true
+        end
+
+        local function restore_normal_state()
+            require("zen-mode").close()
+            vim.wo.number = true
+            vim.wo.rnu = true
+            vim.opt.colorcolumn = "80"
         end
 
         vim.keymap.set("n", "<leader>zz", function()
@@ -30,7 +34,6 @@ return {
                 },
             }
             require("zen-mode").toggle()
-            vim.wo.wrap = false
             vim.wo.number = true
             vim.wo.rnu = true
         end)
@@ -47,28 +50,13 @@ return {
                 },
             }
             require("zen-mode").toggle()
-                vim.wo.wrap = false
                 vim.wo.number = false
                 vim.wo.rnu = false
                 vim.opt.colorcolumn = "0"
-                vim.opt.cmdheight = 0
-                vim.opt.laststatus = 0
-                vim.opt.ruler = false
-                vim.opt.showmode = false
-                vim.opt.showcmd = false
         end)
 
         vim.keymap.set("n", "<leader>zq", function()
-            require("zen-mode").close()
-            vim.wo.wrap = true
-            vim.wo.number = true
-            vim.wo.rnu = true
-            vim.opt.colorcolumn = "80"
-            vim.opt.cmdheight = 1
-            vim.opt.laststatus = 2
-            vim.opt.ruler = true
-            vim.opt.showmode = true
-            vim.opt.showcmd = true
+            restore_normal_state()
         end)
 
         vim.api.nvim_create_autocmd("FileType", {
@@ -85,6 +73,18 @@ return {
                         "m",
                         false
                     )
+                end)
+            end,
+        })
+
+        vim.api.nvim_create_autocmd("BufEnter", {
+            callback = function()
+                vim.schedule(function()
+                    local filetype = vim.bo.filetype
+                    local buftype = vim.bo.buftype
+                    if filetype == "oil" or buftype ~= "" then
+                        restore_normal_state()
+                    end
                 end)
             end,
         })
