@@ -4,7 +4,9 @@ return {
         local function is_normal_buffer()
             local buftype = vim.bo.buftype
             local filetype = vim.bo.filetype
-            local excluded_filetypes = { "oil", "neo-tree", "NvimTree", "TelescopePrompt" }
+            local excluded_filetypes = {
+                "oil", "neo-tree", "NvimTree", "TelescopePrompt"
+            }
             if buftype ~= "" then
                 return false
             end
@@ -15,6 +17,8 @@ return {
             end
             return true
         end
+
+        local zen_was_active = false
 
         local function restore_normal_state()
             require("zen-mode").close()
@@ -56,6 +60,7 @@ return {
         end)
 
         vim.keymap.set("n", "<leader>zq", function()
+            zen_was_active = false
             restore_normal_state()
         end)
 
@@ -77,13 +82,32 @@ return {
             end,
         })
 
+        vim.api.nvim_create_autocmd("BufLeave", {
+            callback = function()
+                if require("zen-mode.view").is_open() then
+                    zen_was_active = true
+                    restore_normal_state()
+                end
+            end,
+        })
+
         vim.api.nvim_create_autocmd("BufEnter", {
             callback = function()
                 vim.schedule(function()
                     local filetype = vim.bo.filetype
                     local buftype = vim.bo.buftype
                     if filetype == "oil" or buftype ~= "" then
-                        restore_normal_state()
+                        return
+                    end
+                    if zen_was_active and is_normal_buffer() then
+                        zen_was_active = false
+                        vim.api.nvim_feedkeys(
+                            vim.api.nvim_replace_termcodes(
+                                "<leader>zZ", true, false, true
+                            ),
+                            "m",
+                            false
+                        )
                     end
                 end)
             end,

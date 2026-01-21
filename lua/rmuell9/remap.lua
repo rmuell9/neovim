@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 
 vim.keymap.set("n", "<leader>pv", ":Oil<CR>")
 
-vim.keymap.set("n", "<leader>m", ":split notepad.md <CR>")
+vim.keymap.set("n", "<leader>m", ":split<CR>")
 
 vim.keymap.set("x", "<leader>p", [["_dP]]) -- Paste that preserves clipboard
 

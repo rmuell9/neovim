@@ -2,7 +2,7 @@ return {
     'CRAG666/code_runner.nvim',
     config = function()
         vim.keymap.set('n', '<leader>rr', ':w<CR>:RunCode<CR>')
-        vim.keymap.set('n', '<leader>re', ':RunClose<CR>')
+        vim.keymap.set('n', '<leader>rc', ':RunClose<CR>')
         require('code_runner').setup {
             filetype = {
                 python = 'python3 -u',
