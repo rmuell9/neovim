@@ -1,3 +1,4 @@
+-- This is vibe-coded to hell but it works!
 return {
     "folke/zen-mode.nvim",
     config = function()
@@ -26,6 +27,42 @@ return {
             vim.wo.rnu = true
             vim.opt.colorcolumn = "80"
         end
+
+        local function create_quit_wrapper(cmd)
+            return function()
+                if require("zen-mode.view").is_open() then
+                    vim.cmd(cmd)
+                    vim.cmd(cmd)
+                else
+                    vim.cmd(cmd)
+                end
+            end
+        end
+
+        vim.api.nvim_create_user_command("Q", create_quit_wrapper("q"), {})
+        vim.api.nvim_create_user_command("Wq", create_quit_wrapper("wq"), {})
+        vim.api.nvim_create_user_command("WQ", create_quit_wrapper("wq"), {})
+
+        vim.keymap.set("ca", "q", function()
+            if require("zen-mode.view").is_open() then
+                return "q|q"
+            end
+            return "q"
+        end, { expr = true })
+
+        vim.keymap.set("ca", "wq", function()
+            if require("zen-mode.view").is_open() then
+                return "wq|q"
+            end
+            return "wq"
+        end, { expr = true })
+
+        vim.keymap.set("ca", "q!", function()
+            if require("zen-mode.view").is_open() then
+                return "q!|q!"
+            end
+            return "q!"
+        end, { expr = true })
 
         vim.keymap.set("n", "<leader>zz", function()
             if not is_normal_buffer() then
